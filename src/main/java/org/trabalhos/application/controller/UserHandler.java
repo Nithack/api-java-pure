@@ -37,8 +37,10 @@ public class UserHandler implements HttpHandler {
                 logger.info("POST");
                 createUser(exchange);
             }
-            case "PUT" -> logger.info("PUT");
-
+            case "PUT" -> {
+                logger.info("PUT");
+                updateUser(exchange);
+            }
             case "DELETE" -> {
                 logger.info("DELETE");
                 deleteUser(exchange);
@@ -115,7 +117,7 @@ public class UserHandler implements HttpHandler {
             }
             boolean result = userRepository.delete(id);
             if(!result) {
-                logger.info("Erro ao deletar usuário");
+                logger.info("Usuário não encontrado id: " + id);
                 sendResponse(exchange, 400, "Erro ao deletar usuário");
                 return;
             }
@@ -127,6 +129,33 @@ public class UserHandler implements HttpHandler {
             sendResponse(exchange, 400, "Erro ao deletar usuário: " + e.getMessage());
         }
     }
+    private void updateUser(HttpExchange exchange) throws IOException {
+        try {
+            String id = exchange.getRequestURI().getPath().split("/")[2];
+            User user = userRepository.getById(id);
+            if(user == null) {
+                logger.info("Usuário não encontrado");
+                sendResponse(exchange, 404, "Usuário não encontrado");
+                return;
+            }
+            String body = new String(exchange.getRequestBody().readAllBytes());
+            User userUpdate = convertFromJson(body, User.class);
+            boolean result = userRepository.update(userUpdate, id);
+            if(!result) {
+                logger.info("Usuário não encontrado id: " + id);
+                sendResponse(exchange, 400, "Erro ao deletar usuário");
+                return;
+            }
+
+            logger.info("Usuário atualizado com sucesso");
+            sendResponse(exchange, 201, "Usuário atualizado com sucesso");
+
+        } catch (Exception e) {
+            logger.info("Erro ao atualizar usuário: " + e.getMessage());
+            sendResponse(exchange, 400, "Erro ao atualizar usuário: " + e.getMessage());
+        }
+    }
+
 
     private void sendResponse(HttpExchange exchange, int statusCode, String responseText) throws IOException {
         exchange.getResponseHeaders().set("Content-Type", "application/json; charset=UTF-8");

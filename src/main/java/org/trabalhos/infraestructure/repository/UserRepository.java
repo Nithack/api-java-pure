@@ -82,6 +82,21 @@ public class UserRepository {
         }
         return result;
     }
+    public boolean update(User user, String id) {
+        String sql = "UPDATE usuario SET prenome = ?, sobrenome = ?, pwr = ? WHERE lgn = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, user.getFirstName());
+            preparedStatement.setString(2, user.getLastName());
+            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setString(4, id);
+            preparedStatement.executeUpdate();
+            logger.info("Usuário alterado  com sucesso");
+            return true;
+        } catch (SQLException e) {
+            logger.info("Erro ao alterar usuário: " + e.getMessage());
+            return false;
+        }
+    }
 
     private User mappingResponseToUser(ResultSet resultSet) throws SQLException {
         return new User(
