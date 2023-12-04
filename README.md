@@ -50,8 +50,4 @@ Para configurar e executar a imagem do Docker do Oracle Database, siga estas eta
 
 Sua contribuição é muito bem-vinda! Se você tem sugestões de melhorias ou novas funcionalidades, fique à vontade para criar um pull request.
 
-## Licença
 
-[Inserir detalhes da licença aqui]
-
----
