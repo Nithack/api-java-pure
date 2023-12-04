@@ -17,3 +17,7 @@ g
 7src/main/java/org/trabalhos/application/model/User.java,d\1\d1b6022051af166f71b2cf03d4461ec6c16e4080
 n
 >src/main/java/org/trabalhos/application/config/HttpConfig.java,9\9\99fe649f165b6566fae646795bddb28be64a7633
+s
+Csrc/main/java/org/trabalhos/application/controller/PartHandler.java,d\0\d0319d89e5203138c78ec5bb45af75d11aba57f4
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
