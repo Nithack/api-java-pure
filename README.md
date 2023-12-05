@@ -1,5 +1,3 @@
-
-
 # JavaPureAPI
 
 Bem-vindo ao repositório `JavaPureAPI`, uma implementação simples e eficiente de uma API em Java puro. Este projeto é ideal para quem deseja aprender sobre Java e desenvolvimento de APIs sem o uso de frameworks adicionais.
@@ -19,26 +17,30 @@ Para executar este projeto, você precisará do seguinte:
 
 ## Configuração do Docker com Oracle
 
-Para configurar e executar a imagem do Docker do Oracle Database, siga estas etapas:
+Antes de rodar o `docker-compose`, é necessário configurar o login para baixar a imagem do Oracle Database. Siga estas etapas:
 
 1. **Instalar o Docker:** Primeiro, instale o Docker a partir do [site oficial do Docker](https://www.docker.com/get-started).
 
-2. **Baixar Imagem do Oracle:** No terminal, execute:
-   ```bash
-   docker pull store/oracle/database-enterprise:12.2.0.1
-   ```
+2. **Configurar o Login no Docker Hub:** Você precisará de uma conta no Docker Hub. Se ainda não tiver, crie uma no site [Docker Hub](https://hub.docker.com/). 
 
-3. **Criar Container do Oracle:** Em seguida, crie um container com:
+3. **Login via Terminal:** No terminal, execute o comando abaixo para fazer login:
    ```bash
-   docker run -d -p 1521:1521 --name oracle-db store/oracle/database-enterprise:12.2.0.1
+   docker login
    ```
+   Insira suas credenciais do Docker Hub quando solicitado.
 
-4. **Verificar Container:** Confirme se o container está rodando com:
+4. **Usar Docker-Compose:** No diretório do projeto, onde o arquivo `docker-compose.yml` está localizado, execute:
+   ```bash
+   docker-compose up
+   ```
+   Isso irá baixar e configurar automaticamente a imagem do Oracle especificada no `docker-compose.yml`.
+
+5. **Verificar Containers:** Após a conclusão, verifique se os containers estão rodando corretamente com:
    ```bash
    docker ps
    ```
 
-5. **Conectar com a API:** Atualize as configurações de conexão da API para apontar para o banco de dados Oracle no Docker.
+6. **Conectar com a API:** Atualize as configurações de conexão da API para apontar para o banco de dados Oracle no Docker.
 
 ## Como Executar
 
@@ -49,5 +51,3 @@ Para configurar e executar a imagem do Docker do Oracle Database, siga estas eta
 ## Contribuições
 
 Sua contribuição é muito bem-vinda! Se você tem sugestões de melhorias ou novas funcionalidades, fique à vontade para criar um pull request.
-
-
